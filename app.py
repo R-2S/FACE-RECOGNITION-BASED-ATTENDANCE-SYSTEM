@@ -6,10 +6,48 @@ import os
 
 app=Flask(__name__)
 
+app.config['SECRET_KEY']='SECRET_KEY'
+app.config['SESSION_TYPE']='memcached'
+app.config['UPLOAD_FOLDER']='C:\FRBAS'
+
 
 @app.route("/")
 def home():
     return render_template('home.html')
+
+@app.route("/student_login", methods=['GET', 'POST'])
+def student_login():
+    if (request.method == 'POST'):
+        username = request.form.get('username')
+        password = request.form.get('password')
+    
+        try:
+            db = pymysql.connect(host='localhost',
+                                 user='root',
+                                 password='secret',
+                                 db='attendance_db',
+                                 autocommit=True)
+
+            cursor  = db.cursor()
+            query_1 = "SELECT * FROM students WHERE reg_no=%s"
+            cursor.execute(query_1, (username))
+
+            global results
+            results = cursor.fetchall()
+            db.close()
+            
+            if (password == results[0][5]):
+                session['username'] = username
+                return "Login Successfully."
+            else:
+                return "Incorrect Password."
+            
+        except Exception as e:
+            print(e)
+    else:
+        return "SIGN UP FIRST!!"
+    
+    return "SIGN UP FIRST!!"
 
   
 @app.route("/log_out")
