@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+{% for course in courses %}
+  <article class="media content-section">
+    <form action="{{ url_for('attendance') }}" method="POST" accept-charset="utf-8">
+      <div class="media-body" style="text-align: center;">
+      <div class="article-metadata py-2 pt-3">
+        <h5><b>C O U R S E &middot; I N F O</b></h5>
+      </div>
+
+      <div class="article-metadata py-4 mb-4">
+        <h5>( {{ course.code }} )</h5>
+        <h5>{{ course.title }}</h5>
+      </div>
+    </form>
+
+    <div class="form-group mb-3">
+      <button type="submit" class="btn btn-success">Open / View</button>
+    </div>
+  </article>
+{% endfor %}
+
+{% endblock %}

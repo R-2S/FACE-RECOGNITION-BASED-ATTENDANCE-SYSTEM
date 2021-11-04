@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+  <form method="POST" action="{{ url_for('face') }}">
+    <fieldset class="form-group mb-3">
+      <legend class="border-bottom py-3">
+        <h4>Mark Your Attendance</h4>
+      </legend>
+    </fieldset>
+
+    <table class="table table-hover mb-4">
+      <thead>
+        <tr>
+          <th scope="col">SN.</th>
+          <th scope="col">Instructions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Click on the 'Mark Attendance' button give below.</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Scan your face using your webcamera.</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Press 'Q' to close the face-scanner window.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="form-group pt-3 mb-4">
+      <button type="submit" class="btn btn-warning">Mark Attendance</button>
+    </div>
+  </form>
+</div>
+{% endblock %}
